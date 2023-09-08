@@ -131,9 +131,63 @@ public class AlumnoData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno"+ ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno" + ex.getMessage());
         }
         return alumnos;
     }
 
+    public void modificarAlumno(Alumno alumno) {
+
+        String sql = "UPDATE alumno SET dni = ?, apellido = ?, nombre = ?, fechaNacimiento=? WHERE idAlumno= ? ";
+        PreparedStatement ps = null;
+
+        try {
+
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, alumno.getDni());
+            ps.setString(2, alumno.getApellido());
+            ps.setString(3, alumno.getNombre());
+            ps.setDate(4, (Date) alumno.getFechaN());
+            ps.setInt(5, alumno.getIdAlumno());
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+
+                JOptionPane.showMessageDialog(null, "Alumno modificado con exito.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El alumno no existe");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno." + ex.getMessage());
+        }
+
+    }
+
+    public void eliminarAlumno(int id) {
+        
+        try {
+            
+            String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila = ps.executeUpdate();
+            
+            if (fila == 1) {
+                JOptionPane.showMessageDialog(null, "Alumno eliminado exitosamente");
+                
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno." + ex.getMessage());
+        } 
+        
+        
+        
+        
+        
+    }
+    
+    
+    
 }
