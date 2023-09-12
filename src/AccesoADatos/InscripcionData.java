@@ -113,6 +113,6 @@ public class InscripcionData {
         return listMat;
     }
     
-    
+    // HACER EL METODO OBTENER MATERIAS NO CURSADAS !!!
     
 }
