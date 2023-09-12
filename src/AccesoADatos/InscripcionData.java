@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package AccesoADatos;
-
+import Entidades.Materia;
 import Entidades.Inscripcion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -89,4 +89,30 @@ public class InscripcionData {
         return listaInsc;
     }
 
+    public List <Materia > obtenerMateriasCursadas(int id) {
+        
+        String sql = "SELECT idMateria FROM inscripcion WHERE idAlumno = ? ";
+        List <Materia> listMat = new ArrayList<>();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                Materia materia = new Materia();
+                materia.setAno(rs.getInt("año"));
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setEstado(true);
+                listMat.add(materia);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listMat;
+    }
+    
+    
+    
 }
