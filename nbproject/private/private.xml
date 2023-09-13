@@ -5,10 +5,9 @@
         <group>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/GUIA5Universidad/src/AccesoADatos/MateriaData.java</file>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/GUIA5Universidad/src/guia5universidad/GUIA5Universidad.java</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/GUIA5Universidad/src/AccesoADatos/AlumnoData.java</file>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/GUIA5Universidad/src/Entidades/Materia.java</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/GUIA5Universidad/src/AccesoADatos/Conexion.java</file>
-            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/GUIA5Universidad/src/Entidades/Inscripcion.java</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/GUIA5Universidad/src/AccesoADatos/AlumnoData.java</file>
+            <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/GUIA5Universidad/src/Entidades/Alumno.java</file>
             <file>file:/C:/Users/Leandro/Documents/NetBeansProjects/GUIA5Universidad/src/AccesoADatos/InscripcionData.java</file>
         </group>
     </open-files>

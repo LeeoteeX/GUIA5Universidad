@@ -117,5 +117,22 @@ public class MateriaData {
         return materias;
     }
     
-    
+    public void eliminarMateria(int id) {
+        String sql = "UPDATE materia SET estado = 0 WHERE idMateria=?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int correcto= ps.executeUpdate();
+            if (correcto == 1) {
+                JOptionPane.showMessageDialog(null, "Se elimino correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "La materia no existe");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

@@ -58,12 +58,14 @@ public class GUIA5Universidad {
        // BUSCAR MATERIA
 //        System.out.println(mat.buscarMateria(99));
 
-        // MODIFICAR MATERIA
-        mat.modificarMateria(materia4);
-        
+//        // MODIFICAR MATERIA
+//        mat.modificarMateria(materia4);
+//        
         // LISTAR MATERIAS
         System.out.println(mat.listarMaterias());
         
+        // ELIMINAR MATERIA
+        mat.eliminarMateria(102);
     }
     
 }
