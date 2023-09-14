@@ -71,7 +71,7 @@ public class AlumnoData {
                 alumno.setEstado(true);
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el alumno");
+                JOptionPane.showMessageDialog(null, "No existe el alumno o esta inactivo");
                 ps.close();
             }
 
