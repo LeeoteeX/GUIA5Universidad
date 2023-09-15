@@ -127,5 +127,26 @@ public class InscripcionData {
     
     // HACER EL METODO OBTENER MATERIAS NO CURSADAS !!!
     
-   
+   public List <Materia > obtenerMateriasNOCursadas(int id) {
+        
+        String sql = "SELECT * FROM inscripcion, materia WHERE inscripcion.idAlumno =! ?  AND  ";
+        List <Materia> listMat = new ArrayList<>();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                Materia materia = new Materia();
+                materia = matData.buscarMateria(rs.getInt("idMateria"));
+                materia.setEstado(true);
+                listMat.add(materia);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listMat;
+    }
+    
 }
