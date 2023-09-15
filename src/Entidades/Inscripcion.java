@@ -58,10 +58,8 @@ public class Inscripcion {
 
     @Override
     public String toString() {
-        return "Inscripcion{" + "idInscripto=" + idInscripto + ", nota=" + nota + ", alumno=" + alumno + ", materia=" + materia + '}';
+        return "Inscripcion{" + "Id Inscripcion: " + idInscripto + ", Nota: " + nota + ", ID:" + alumno.getIdAlumno() + " Nombre: " + alumno.getNombre()+" " + alumno.getApellido()+ ", Materia: " + materia.getIdMateria() + " " +materia.getNombre() + '}'+"\n";
     }
-
-
 
 
 }

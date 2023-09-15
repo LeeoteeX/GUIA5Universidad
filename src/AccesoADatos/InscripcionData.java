@@ -25,8 +25,8 @@ import org.mariadb.jdbc.Statement;
 public class InscripcionData {
 
     Connection conn = null;
-    MateriaData matData;
-    AlumnoData aluData;
+    MateriaData matData = new MateriaData();
+    AlumnoData aluData = new AlumnoData();
 
     public InscripcionData() {
 
@@ -62,18 +62,13 @@ public class InscripcionData {
         try {
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
-            int idAlumno, idMateria;
             while (rs.next()) {
                 Inscripcion inscripcion = new Inscripcion();
-                Alumno alumno = new Alumno();
-                Materia materia = new Materia();
+                Alumno alu = aluData.buscarAlumno(rs.getInt("idAlumno"));
+                Materia materia = matData.buscarMateria(rs.getInt("idMateria"));
                 inscripcion.setIdInscripto(rs.getInt("idInscripto"));
-                idAlumno=(rs.getInt("idAlumno"));
-                idMateria=(rs.getInt("idMateria"));
                 inscripcion.setNota(rs.getDouble("nota"));
-                alumno = alum.buscarAlumno(idAlumno);
-                materia = mat.buscarMateria(idMateria);
-                inscripcion.setAlumno(alumno);
+                inscripcion.setAlumno(alu);
                 inscripcion.setMateria(materia);
                 listaInsc.add(inscripcion);
             }
@@ -85,27 +80,28 @@ public class InscripcionData {
         return listaInsc;
     }
 
-//    public List<Inscripcion> obtenerInscripcionesPorAlumno(int id) {
-//
-//        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
-//        List<Inscripcion> listaInsc = new ArrayList<>();
-//        try {
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                Inscripcion inscripcion = new Inscripcion();
-//                inscripcion.setIdAlumno(rs.getInt("idAlumno"));
-//                inscripcion.setIdInscripto(rs.getInt("idInscripto"));
-//                inscripcion.setIdMaterial(rs.getInt("idMateria"));
-//                listaInsc.add(inscripcion);
-//            }
-//            ps.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error de Conexion, OBTENER INSCRIPCIONES POR ALUMNO" + ex.getMessage());
-//        }
-//        return listaInsc;
-//    }
+    public List<Inscripcion> obtenerInscripcionesPorAlumno(int id) {
+
+        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+        List<Inscripcion> listaInsc = new ArrayList<>();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Inscripcion inscripcion = new Inscripcion();
+                inscripcion.setAlumno(aluData.buscarAlumno(id));
+                inscripcion.setIdInscripto(rs.getInt("idInscripto"));
+                inscripcion.setMateria(matData.buscarMateria(rs.getInt("idMateria")));
+                inscripcion.setNota(rs.getDouble("nota"));
+                listaInsc.add(inscripcion);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de Conexion, OBTENER INSCRIPCIONES POR ALUMNO" + ex.getMessage());
+        }
+        return listaInsc;
+    }
 
     public List <Materia > obtenerMateriasCursadas(int id) {
         
@@ -117,9 +113,7 @@ public class InscripcionData {
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 Materia materia = new Materia();
-                materia.setAno(rs.getInt("año"));
-                materia.setIdMateria(rs.getInt("idMateria"));
-                materia.setNombre(rs.getString("nombre"));
+                materia = matData.buscarMateria(rs.getInt("idMateria"));
                 materia.setEstado(true);
                 listMat.add(materia);
             }
@@ -133,4 +127,5 @@ public class InscripcionData {
     
     // HACER EL METODO OBTENER MATERIAS NO CURSADAS !!!
     
+   
 }

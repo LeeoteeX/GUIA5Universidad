@@ -10,6 +10,7 @@ import Entidades.Inscripcion;
 import Entidades.Materia;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
@@ -73,13 +74,10 @@ public class GUIA5Universidad {
 //        Inscripcion inscripcion = new Inscripcion(2, alumno, materia4);
         InscripcionData inscData = new InscripcionData();
 //        inscData.guardarInscripcion(inscripcion);
-        List<Inscripcion> lista = inscData.obtenerInscripciones();
-        for (Inscripcion inscripcion : lista) {
-    System.out.println("ID de Inscripción: " + inscripcion.getIdInscripto());
-    System.out.println("ID de Alumno: " + inscripcion.getAlumno().getIdAlumno());
-    System.out.println("ID de Materia: " + inscripcion.getMateria().getIdMateria());
-    System.out.println("Nota: " + inscripcion.getNota());
-    System.out.println("------------"); // Separador entre inscripciones
-    }
+        System.out.println(inscData.obtenerInscripciones());
+        
+        System.out.println(inscData.obtenerInscripcionesPorAlumno(163));
+        
+        System.out.println(inscData.obtenerMateriasCursadas(162));
     }
 }

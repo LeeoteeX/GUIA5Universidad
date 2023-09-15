@@ -60,7 +60,7 @@ public class AlumnoData {
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
 
                 alumno = new Alumno();
                 alumno.setIdAlumno(id);
@@ -69,12 +69,8 @@ public class AlumnoData {
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaN(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe el alumno o esta inactivo");
-                ps.close();
-            }
-
+            } 
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno." + ex.getMessage());
         }
