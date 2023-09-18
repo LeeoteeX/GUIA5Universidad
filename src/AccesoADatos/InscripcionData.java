@@ -129,7 +129,7 @@ public class InscripcionData {
     
    public List <Materia > obtenerMateriasNOCursadas(int id) {
         
-        String sql = "SELECT * FROM inscripcion, materia WHERE inscripcion.idAlumno =! ?  AND  ";
+        String sql = "SELECT nombre FROM materia NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno = ? ) AND estado = true ";
         List <Materia> listMat = new ArrayList<>();
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
